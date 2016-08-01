@@ -1,0 +1,91 @@
+<!-- map_api.html -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		/*Set the width and height of the map, and center*/
+		#map {
+			width: 80%;
+			height: 550px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+    	</style>
+
+  </head>
+  <body>
+	<!-- Ugly title -->
+	<h3>My Google Maps Demo</h3>
+	<!-- Create map div -->
+	<div id="map"></div>
+	<script>
+		// Set up map
+		function initMap() {
+			var mapDiv = document.getElementById('map');
+			// Load map visual
+			var map = new google.maps.Map(mapDiv, {
+				center: {lat: 42.365589, lng: -71.092623},
+				zoom: 6,
+				mapTypeId: google.maps.MapTypeId.HYBRID
+				});
+			// Add a marker
+			var marker=new google.maps.Marker({
+				position: {lat: 42.365589, lng: -71.092623},
+				});
+			marker.setMap(map);
+			// Open infoWindow on click
+			marker.addListener('click', function() {
+				var infowindow = new google.maps.InfoWindow({
+					content:"<h3>Girls Who Code, Twitter Boston</h3>" + "<p>Where I've spent 200+ hours this summer coding.</p>"
+					});
+			infowindow.open(map,marker);
+			});
+      }
+    </script>
+    <!-- Call the funtion to set up/load map -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?AIzaSyBx6iDdeFvI6guSmON1Cpbpy9-rtAldQMg=YOUR_API_KEY&callback=initMap">
+    </script>
+    <!-- Add multiple markers -->
+    <script type="text/javascript">
+	    var locations = [
+	      ['2 Vine', 42.878995, -71.953634, 4],
+	      ['Hillcrest', 42.886688, -71.961256, 5],
+	      ["St. Paul's School", 43.197737, -71.571480, 3],
+	      // ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+	      // ['Maroubra Beach', -33.950198, 151.259302, 1]
+	    ];
+		var marker, i;
+
+	    for (i = 0; i < locations.length; i++) {  
+	      marker = new google.maps.Marker({
+	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+	        map: map
+	      });
+		// var map = new google.maps.Map(document.getElementById('map'), {
+		//       zoom: 10,
+		//       center: new google.maps.LatLng(-33.92, 151.25),
+		//       mapTypeId: google.maps.MapTypeId.ROADMAP
+		//     });
+
+		//     var infowindow = new google.maps.InfoWindow();
+
+		//     var marker, i;
+
+		//     for (i = 0; i < locations.length; i++) {  
+		//       marker = new google.maps.Marker({
+		//         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+		//         map: map
+		//       });
+
+		//       google.maps.event.addListener(marker, 'click', (function(marker, i) {
+		//         return function() {
+		//           infowindow.setContent(locations[i][0]);
+		//           infowindow.open(map, marker);
+		//         }
+		//       })(marker, i));
+		    }
+  		</script>
+  </body>
+</html>
